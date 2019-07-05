@@ -86,6 +86,10 @@
       <groupId>io.fabric8</groupId>
       <artifactId>openshift-client</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-kafka</artifactId>
+    </dependency>
     <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

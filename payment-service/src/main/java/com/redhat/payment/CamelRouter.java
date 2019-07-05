@@ -3,6 +3,7 @@ package com.redhat.payment;
 import com.redhat.payment.greetings.Greetings;
 import com.redhat.payment.service.Payment;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +37,10 @@ public class CamelRouter extends RouteBuilder {
 
         from("direct:paymentImpl").description("Payment REST service implementation route")
             .streamCaching()
-            .log("${body}");
+            .log("${body}")
+            // TODO transformation
+            .setHeader(KafkaConstants.KEY, constant("payment"))
+            .to("kafka:payment?brokers={{kafka.broker}}");
 
         rest("/greetings").description("Greeting to {name}")
             .get("/{name}").outType(Greetings.class)
