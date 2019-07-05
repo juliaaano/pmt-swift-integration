@@ -1,12 +1,13 @@
-package com.redhat.fuse.boosters.rest.http;
+package com.redhat.payment;
 
+import com.redhat.payment.greetings.Greetings;
+import com.redhat.payment.service.Payment;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
 /**
  * A simple Camel REST DSL route that implements the greetings service.
- * 
  */
 @Component
 public class CamelRouter extends RouteBuilder {
@@ -17,7 +18,7 @@ public class CamelRouter extends RouteBuilder {
         // @formatter:off
         restConfiguration()
                 .apiContextPath("/api-doc")
-                .apiProperty("api.title", "Greeting REST API")
+                .apiProperty("api.title", "Payment REST API")
                 .apiProperty("api.version", "1.0")
                 .apiProperty("cors", "true")
                 .apiProperty("base.path", "camel/")
@@ -27,6 +28,16 @@ public class CamelRouter extends RouteBuilder {
             .component("servlet")
             .bindingMode(RestBindingMode.json);
         
+        rest("/payment").description("Payment submission")
+            .post()
+                .type(Payment.class)
+            .route().routeId("payment-api")
+            .to("direct:paymentImpl");
+
+        from("direct:paymentImpl").description("Payment REST service implementation route")
+            .streamCaching()
+            .log("${body}");
+
         rest("/greetings").description("Greeting to {name}")
             .get("/{name}").outType(Greetings.class)
                 .route().routeId("greeting-api")
@@ -34,7 +45,7 @@ public class CamelRouter extends RouteBuilder {
 
         from("direct:greetingsImpl").description("Greetings REST service implementation route")
             .streamCaching()
-            .to("bean:greetingsService?method=getGreetings");     
+            .to("bean:greetingsService?method=getGreetings");
         // @formatter:on
     }
 

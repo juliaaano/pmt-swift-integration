@@ -14,7 +14,7 @@
  * permissions and limitations under the License.
  */
 
-package com.redhat.fuse.boosters.rest.http;
+package com.redhat.payment.greetings;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
