@@ -7,9 +7,7 @@ import org.apache.camel.component.kafka.KafkaConstants;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 
-/**
- * A simple Camel REST DSL route that implements the greetings service.
- */
+
 @Component
 public class CamelRouter extends RouteBuilder {
 

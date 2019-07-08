@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.yourcompany.newapp</groupId>
+  <groupId>com.redhat.payment</groupId>
   <artifactId>payment-service</artifactId>
   <version>1.0.0</version>
   <name>Fuse :: Boosters :: Rest HTTP</name>
@@ -83,12 +83,12 @@
       <artifactId>camel-swagger-java-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.fabric8</groupId>
-      <artifactId>openshift-client</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-kafka</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>openshift-client</artifactId>
     </dependency>
     <!-- Test -->
     <dependency>
