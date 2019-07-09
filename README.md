@@ -1,6 +1,6 @@
 # Payment Swift Integration Demo
 
-## Setup Environment
+## Setup environment
 
 ```
 docker-compose up --detach
@@ -8,19 +8,19 @@ docker-compose up --detach
 
 ## Payment Service
 
-1. Create Kafka Topic
+1. Create Kafka topic
 
 ```
 docker-compose exec kafka kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic payment
 ```
 
-2. Run Fuse Application
+2. Run Fuse application
 
 ```
 mvn --file payment-service/pom.xml spring-boot:run
 ```
 
-3. Consume (listen) Kafka Messages
+3. Consume (listen) Kafka messages
 
 ```
 docker-compose exec kafka kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic payment --from-beginning
