@@ -1,25 +1,26 @@
 # Payment Swift Integration Demo
 
-## Payment Service
-
-```
-cd payment-service
-```
-
-1. Setup Kafka and Topics
+## Setup Environment
 
 ```
 docker-compose up --detach
+```
+
+## Payment Service
+
+1. Create Kafka Topic
+
+```
 docker-compose exec kafka kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic payment
 ```
 
-2. Run Fuse application
+2. Run Fuse Application
 
 ```
-mvn spring-boot:run
+mvn --file payment-service/pom.xml spring-boot:run
 ```
 
-3. Consume (listen) Kafka messages
+3. Consume (listen) Kafka Messages
 
 ```
 docker-compose exec kafka kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic payment --from-beginning
@@ -27,38 +28,18 @@ docker-compose exec kafka kafka-console-consumer.sh --bootstrap-server localhost
 
 ## Legacy Integration
 
-```
-cd legacy-integration
-```
-
-1. Setup IBM MQ
+1. Connect to IBM MQ console
 
 ```
-docker-compose up --detach
+https://localhost:9443 (login: admin / passw0rd)
 ```
 
-2. Connect to IBM MQ console
+2. Run Fuse application
 
 ```
-https://localhost:9443
-Login: admin / passw0rd
-```
-
-3. Run Fuse application
-
-```
-mvn spring-boot:run
+mvn --file legacy-integration/pom.xml spring-boot:run
 ```
 
 ## Batch Handler
 
-```
-cd batch-handler
-```
-
 ## Aggregation Service
-
-```
-cd aggreation-service
-```
-
